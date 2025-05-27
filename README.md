@@ -36,6 +36,8 @@ bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
+For open-source version, we use the prompts in [HPD](https://huggingface.co/datasets/ymhao/HPDv2/tree/main) dataset for training, as shown in ```"./prompts.txt"```.
+
 ### Rewards
 We give the (moving average) reward curves of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
 
