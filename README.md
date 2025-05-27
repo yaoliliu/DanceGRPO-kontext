@@ -35,7 +35,7 @@ bash scripts/finetune/finetune_flux_grpo.sh
 ```
 
 ### Rewards
-We give the (moving average) reward curves of Stable Diffusion (left) and FLUX (right). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
+We give the (moving average) reward curves of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
 
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
