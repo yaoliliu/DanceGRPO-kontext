@@ -33,7 +33,7 @@ torchrun --nnodes=2 --nproc_per_node=8 --node_rank=0 --master_addr=192.168.0.101
     --train_sp_batch_size 1 \
     --dataloader_num_workers 4 \
     --gradient_accumulation_steps 4 \
-    --max_train_steps 200 \
+    --max_train_steps 300 \
     --learning_rate 1e-5 \
     --mixed_precision bf16 \
     --checkpointing_steps 40 \
