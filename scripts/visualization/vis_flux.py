@@ -34,7 +34,7 @@ def main():
     rank, local_rank, world_size = distributed_setup()
     
     pipe = FluxPipeline.from_pretrained(
-        "./flux",
+        "./data/flux",
         torch_dtype=torch.bfloat16,
         use_safetensors=True
     ).to("cuda")
