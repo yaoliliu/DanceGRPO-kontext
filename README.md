@@ -14,6 +14,7 @@ DanceGRPO has the following features:
 
 ## Getting Started
 ### Downloading checkpoints
+You should use ```"mkdir"``` for these folders first.
 1. Download the Stable Diffusion v1.4 checkpoints from [here](https://huggingface.co/CompVis/stable-diffusion-v1-4) to "./data/stable-diffusion-v1-4".
 2. Download the FLUX checkpoints from [here](https://huggingface.co/black-forest-labs/FLUX.1-dev) to "./data/flux".
 3. Download the HPS-v2.1 checkpoint (HPS_v2.1_compressed.pt) from [here](https://huggingface.co/xswu/HPSv2/tree/main) to "./hps_ckpt".
@@ -41,9 +42,9 @@ We give the (moving average) reward curves of Stable Diffusion (left or upper) a
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
-We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in "./assets/flux_visualization". The visualization scripts can be find in "./scripts/visualization/vis_flux.py". We always use larger resolutions and more sampling steps than RLHF training for visualization.
+We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization.
 
-More discussion on FLUX can be found in "./fastvideo/README.md".
+More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
 
 ## Acknowledgement
 We learned and reused code from the following projects:
