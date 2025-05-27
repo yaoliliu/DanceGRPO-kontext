@@ -1,6 +1,7 @@
 ## DanceGRPO
 **DanceGRPO is the first unified RL-based framework for visual generation.**
 
+This is the official implementation for [paper](https://arxiv.org/abs/2505.07818), DanceGRPO: Unleashing GRPO on Visual Generation.
 We develop [DanceGRPO](https://arxiv.org/abs/2505.07818) based on FastVideo, a scalable and efficient framework for video and image generation.
 
 ## Key Features
