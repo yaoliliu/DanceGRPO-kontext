@@ -44,7 +44,7 @@ We give the (moving average) reward curves of Stable Diffusion (left or upper) a
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
-We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization.
+We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training.
 
 More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
 
