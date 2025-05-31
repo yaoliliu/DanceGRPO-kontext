@@ -33,7 +33,6 @@ bash scripts/finetune/finetune_sd_grpo.sh
 # for FLUX, preprocessing with 8 H800s
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
 # for FLUX, training with 16 H800s
-# we don't recommend using 8 H800s for the FLUX training script
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
@@ -45,7 +44,9 @@ We give the (moving average) reward curves of Stable Diffusion (left or upper) a
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
-We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training.
+We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training
+
+We don't recommend using 8 H800s for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
 
 More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
 
