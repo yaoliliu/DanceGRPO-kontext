@@ -720,8 +720,8 @@ def main(args):
 
     step_times = deque(maxlen=100)
 
-
-    for epoch in range(1000000):
+    # The number of epochs 2 is a random value; you can also set the number of epochs to be one.
+    for epoch in range(2):
         if isinstance(sampler, DistributedSampler):
             sampler.set_epoch(epoch) # Crucial for distributed shuffling per epoch
 
