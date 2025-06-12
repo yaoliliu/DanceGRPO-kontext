@@ -44,7 +44,9 @@ We give the (moving average) reward curves of Stable Diffusion (left or upper) a
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
-We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. The visualization scripts can be found in ```"./scripts/visualization/vis_flux.py"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training
+We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training.
+
+Here is the visualization script `"./scripts/visualization/vis_flux.py"` for FLUX. First, run `rm -rf ./data/flux/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-160-0`) into `./data/flux/transformer`. After that, you can run the visualization. If it's trained for 160 iterations, the results are already provided in my repo.  
 
 We don't recommend using 8 H800s for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
 
