@@ -394,6 +394,9 @@ def main(_):
         pipeline.unet.eval()
         samples = []
 
+        if epoch > config.num_epochs:
+            break
+
         expanded_prompts = []
         for p in prompts:
             expanded_prompts.extend([p] * config.num_generations)
