@@ -9,16 +9,22 @@ We develop [DanceGRPO](https://arxiv.org/abs/2505.07818) based on FastVideo, a s
 DanceGRPO has the following features:
 - Support Stable Diffusion
 - Support FLUX
-- Support HunyuanVideo (todo)
-
+- Support HunyuanVideo
 
 ## Getting Started
 ### Downloading checkpoints
-You should use ```"mkdir"``` for these folders first.
+You should use ```"mkdir"``` for these folders first. 
+
+For image generation,
 1. Download the Stable Diffusion v1.4 checkpoints from [here](https://huggingface.co/CompVis/stable-diffusion-v1-4) to ```"./data/stable-diffusion-v1-4"```.
 2. Download the FLUX checkpoints from [here](https://huggingface.co/black-forest-labs/FLUX.1-dev) to ```"./data/flux"```.
 3. Download the HPS-v2.1 checkpoint (HPS_v2.1_compressed.pt) from [here](https://huggingface.co/xswu/HPSv2/tree/main) to ```"./hps_ckpt"```.
 4. Download the CLIP H-14 checkpoint (open_clip_pytorch_model.bin) from [here](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/tree/main) to ```"./hps_ckpt"```.
+
+For video generation,
+1. Download the HunyuanVideo checkpoints from [here](https://huggingface.co/hunyuanvideo-community/HunyuanVideo) to ```"./data/HunyuanVideo"```.
+2. Download the Qwen2-VL-2B-Instruct checkpoints from [here](https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct) to ```"./Qwen2-VL-2B-Instruct"```.
+3. Download the VideoAlign checkpoints from [here](https://huggingface.co/KwaiVGI/VideoReward) to ```"./videoalign_ckpt"```.
 
 ### Installation
 ```bash
@@ -36,9 +42,18 @@ bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
-For open-source version, we use the prompts in [HPD](https://huggingface.co/datasets/ymhao/HPDv2/tree/main) dataset for training, as shown in ```"./prompts.txt"```.
+For image generation open-source version, we use the prompts in [HPD](https://huggingface.co/datasets/ymhao/HPDv2/tree/main) dataset for training, as shown in ```"./prompts.txt"```.
 
-### Rewards
+```bash
+# for HunyuanVideo, preprocessing with 8 H800s
+bash scripts/preprocess/preprocess_hunyuan_rl_embeddings.sh
+# for HunyuanVideo, training with 16/32 H800s
+bash scripts/finetune/finetune_hunyuan_grpo.sh   
+```
+
+For video generation open-source version, we filter the prompts from [VidProM](https://huggingface.co/datasets/WenhaoWang/VidProM) dataset for training, as shown in ```"./video_prompts.txt"```.
+
+### Image Generation Rewards
 We give the (moving average) reward curves (also the results in `reward.txt` or `hps_reward.txt`) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
 
 <img src=assets/rewards/opensource_sd.png width="49%">
@@ -51,6 +66,13 @@ Here is the visualization script `"./scripts/visualization/vis_flux.py"` for FLU
 We don't recommend using 8 H800s for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
 
 More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
+
+
+### Video Generation Rewards
+
+
+### Multi-reward Training
+
 
 ## Acknowledgement
 We learned and reused code from the following projects:
