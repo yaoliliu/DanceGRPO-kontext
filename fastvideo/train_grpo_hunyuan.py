@@ -706,13 +706,7 @@ def main(args):
                     },
                     step=step,
                 )
-    
-                
-            if args.log_validation and step % args.validation_steps == 0:
-                log_validation(args, transformer, device, torch.bfloat16, step)
 
-    save_checkpoint(transformer, rank, args.output_dir,
-                    args.max_train_steps)
 
 
     if get_sequence_parallel_state():
