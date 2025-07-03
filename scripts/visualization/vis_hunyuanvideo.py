@@ -52,12 +52,6 @@ def flux_step(
 
     pred_original_sample = latents - sigma * model_output
 
-    if sde_solver:
-        delta_t = sigma - sigmas[index + 1]
-        score_estimate = -(latents - pred_original_sample * (1 - sigma)) / sigma**2
-        log_term = -0.5 * eta**2 * score_estimate
-        prev_sample_mean = prev_sample_mean + log_term * dsigma
-
     return prev_sample_mean, pred_original_sample
 
 def assert_eq(x, y, msg=None):
