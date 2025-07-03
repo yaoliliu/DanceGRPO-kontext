@@ -18,7 +18,6 @@ def compressibility():
     config.sample.batch_size = 8
     config.sample.num_batches_per_epoch = 4
 
-    # this corresponds to (8 * 4) / (4 * 2) = 4 gradient updates per epoch.
     config.train.batch_size = 1
     config.train.gradient_accumulation_steps = 4
 
@@ -44,10 +43,10 @@ def hps():
     # this reward is a bit harder to optimize, so I used 2 gradient updates per epoch.
     config.train.gradient_accumulation_steps = 8
 
-    # the DGX machine I used had 8 GPUs, so this corresponds to 8 * 8 * 4 = 256 samples per epoch.
+    # the DGX machine I used had 8 GPUs, so this corresponds to 8 * 16 * 4 = 512 samples per epoch.
     config.sample.batch_size = 4
 
-    # this corresponds to (8 * 4) / (4 * 2) = 4 gradient updates per epoch.
+    # this corresponds to (16 * 4) / (4 * 8) = 2 gradient updates per epoch.
     config.train.batch_size = 4
 
     config.prompt_fn = "aes"
