@@ -66,7 +66,7 @@ We give the (moving average) reward curves (also the results in `reward.txt` or 
 
 
 ### Video Generation Rewards
-We give (moving average) reward curves (also the results in `vq_reward.txt`) of HunyuanVideo with 16/32 H800s.
+We give the (moving average) reward curves (also the results in `vq_reward.txt`) of HunyuanVideo with 16/32 H800s.
 
 With 16 H800s,
 
@@ -76,9 +76,9 @@ With 32 H800s,
 
 <img src=assets/rewards/opensource_hunyuanvideo_32gpus.png width="49%">
 
-1. For open-source version, our mission is to reduce the training cost. So we reduce the number of frames, sampling steps, and GPUs compared with the settings in paper. So the reward curves will be different, but the VQ improvements are similar (50%~60%).
+1. For the open-source version, our mission is to reduce the training cost. So we reduce the number of frames, sampling steps, and GPUs compared with the settings in paper. So the reward curves will be different, but the VQ improvements are similar (50%~60%). 
 2. For visualization, run `rm -rf ./data/HunyuanVideo/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-100-0`) into `./data/HunyuanVideo/transformer`. After that, you can run the visualization script `"./scripts/visualization/vis_hunyuanvideo.sh"`.
-3. Although training with 16 H800s has similar rewards with 32 H800s, but I still find that 32 H800s leads to better visulization results.
+3. Although training with 16 H800s has similar rewards with 32 H800s, I still find that 32 H800s leads to better visulization results.
 4. We plot the rewards by **de-normalizing**, with the formula VQ = VQ * 2.2476 + 3.6757 by following [here](https://huggingface.co/KwaiVGI/VideoReward/blob/main/model_config.json).
 
 
