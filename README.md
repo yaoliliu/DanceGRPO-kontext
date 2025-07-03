@@ -38,7 +38,7 @@ bash scripts/finetune/finetune_sd_grpo.sh
 ```bash
 # for FLUX, preprocessing with 8 H800s
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
-# for FLUX, training with 16 H800s
+# for FLUX, training with 16 H800s for better convergence
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
@@ -47,7 +47,7 @@ For image generation open-source version, we use the prompts in [HPD](https://hu
 ```bash
 # for HunyuanVideo, preprocessing with 8 H800s
 bash scripts/preprocess/preprocess_hunyuan_rl_embeddings.sh
-# for HunyuanVideo, training with 16/32 H800s
+# for HunyuanVideo, training with 16/32 H800s for better convergence
 bash scripts/finetune/finetune_hunyuan_grpo.sh   
 ```
 
