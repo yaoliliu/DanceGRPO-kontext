@@ -32,53 +32,53 @@ For video generation,
 ```
 ### Training
 ```bash
-# for Stable Diffusion, with 8 H800s
+# for Stable Diffusion, with 8 H800 GPUs
 bash scripts/finetune/finetune_sd_grpo.sh   
 ```
 ```bash
-# for FLUX, preprocessing with 8 H800s
+# for FLUX, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
-# for FLUX, training with 16 H800s for better convergence
+# for FLUX, training with 16 H800 GPUs for better convergence
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
 For image generation open-source version, we use the prompts in [HPD](https://huggingface.co/datasets/ymhao/HPDv2/tree/main) dataset for training, as shown in ```"./prompts.txt"```.
 
 ```bash
-# for HunyuanVideo, preprocessing with 8 H800s
+# for HunyuanVideo, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_hunyuan_rl_embeddings.sh
-# for HunyuanVideo, training with 16/32 H800s for better convergence
+# for HunyuanVideo, training with 16/32 H800 GPUs for better convergence
 bash scripts/finetune/finetune_hunyuan_grpo.sh   
 ```
 
 For the video generation open-source version, we filter the prompts from [VidProM](https://huggingface.co/datasets/WenhaoWang/VidProM) dataset for training, as shown in ```"./video_prompts.txt"```.
 
 ### Image Generation Rewards
-We give the (moving average) reward curves (also the results in `reward.txt` or `hps_reward.txt`) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
+We give the (moving average) reward curves (also the results in `reward.txt` or `hps_reward.txt`) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800 GPUs.
 
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
 1. We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training.
 2. Here is the visualization script `"./scripts/visualization/vis_flux.py"` for FLUX. First, run `rm -rf ./data/flux/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-160-0`) into `./data/flux/transformer`. After that, you can run the visualization. If it's trained for 160 iterations, the results are already provided in my repo.  
-3. We don't recommend using 8 H800s for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
+3. We don't recommend using 8 H800 GPUs for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
 4. More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
 
 
 ### Video Generation Rewards
-We give the (moving average) reward curves (also the results in `vq_reward.txt`) of HunyuanVideo with 16/32 H800s.
+We give the (moving average) reward curves (also the results in `vq_reward.txt`) of HunyuanVideo with 16/32 H800 GPUs.
 
-With 16 H800s,
+With 16 H800 GPUs,
 
 <img src=assets/rewards/opensource_hunyuanvideo_16gpus.png width="49%">
 
-With 32 H800s,
+With 32 H800 GPUs,
 
 <img src=assets/rewards/opensource_hunyuanvideo_32gpus.png width="49%">
 
 1. For the open-source version, our mission is to reduce the training cost. So we reduce the number of frames, sampling steps, and GPUs compared with the settings in the paper. So the reward curves will be different, but the VQ improvements are similar (50%~60%). 
 2. For visualization, run `rm -rf ./data/HunyuanVideo/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-100-0`) into `./data/HunyuanVideo/transformer`. After that, you can run the visualization script `"./scripts/visualization/vis_hunyuanvideo.sh"`.
-3. Although training with 16 H800s has similar rewards with 32 H800s, I still find that 32 H800s leads to better visulization results.
+3. Although training with 16 H800 GPUs has similar rewards with 32 H800 GPUs, I still find that 32 H800 GPUs leads to better visulization results.
 4. We plot the rewards by **de-normalizing**, with the formula VQ = VQ * 2.2476 + 3.6757 by following [here](https://huggingface.co/KwaiVGI/VideoReward/blob/main/model_config.json).
 
 
