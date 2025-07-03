@@ -51,7 +51,7 @@ bash scripts/preprocess/preprocess_hunyuan_rl_embeddings.sh
 bash scripts/finetune/finetune_hunyuan_grpo.sh   
 ```
 
-For video generation open-source version, we filter the prompts from [VidProM](https://huggingface.co/datasets/WenhaoWang/VidProM) dataset for training, as shown in ```"./video_prompts.txt"```.
+For the video generation open-source version, we filter the prompts from [VidProM](https://huggingface.co/datasets/WenhaoWang/VidProM) dataset for training, as shown in ```"./video_prompts.txt"```.
 
 ### Image Generation Rewards
 We give the (moving average) reward curves (also the results in `reward.txt` or `hps_reward.txt`) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within 12 hours with 16 H800s.
@@ -76,14 +76,14 @@ With 32 H800s,
 
 <img src=assets/rewards/opensource_hunyuanvideo_32gpus.png width="49%">
 
-1. For the open-source version, our mission is to reduce the training cost. So we reduce the number of frames, sampling steps, and GPUs compared with the settings in paper. So the reward curves will be different, but the VQ improvements are similar (50%~60%). 
+1. For the open-source version, our mission is to reduce the training cost. So we reduce the number of frames, sampling steps, and GPUs compared with the settings in the paper. So the reward curves will be different, but the VQ improvements are similar (50%~60%). 
 2. For visualization, run `rm -rf ./data/HunyuanVideo/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-100-0`) into `./data/HunyuanVideo/transformer`. After that, you can run the visualization script `"./scripts/visualization/vis_hunyuanvideo.sh"`.
 3. Although training with 16 H800s has similar rewards with 32 H800s, I still find that 32 H800s leads to better visulization results.
 4. We plot the rewards by **de-normalizing**, with the formula VQ = VQ * 2.2476 + 3.6757 by following [here](https://huggingface.co/KwaiVGI/VideoReward/blob/main/model_config.json).
 
 
 ### Multi-reward Training
-The Multi-reward training code and reward curves can be find [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
+The Multi-reward training code and reward curves can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
 
 
 ## Acknowledgement
