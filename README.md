@@ -38,9 +38,7 @@ bash scripts/finetune/finetune_sd_grpo.sh
 ```bash
 # for FLUX, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
-# for FLUX, training with 16 H800 GPUs for better convergence
-# (thanks for a community contribution from @Jinfa Huang, if you change the train_batch_size and train_sp_batch_size from 1 to 2, change the gradient_accumulation_steps from 4 to 12,
-# you can train the FLUX with 8 H800 GPUs, and you can finish the FLUX training within a day) 
+# for FLUX, training with 16 H800 GPUs for better convergence 
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
@@ -65,6 +63,7 @@ We give the (moving average) reward curves (also the results in `reward.txt` or 
 2. Here is the visualization script `"./scripts/visualization/vis_flux.py"` for FLUX. First, run `rm -rf ./data/flux/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-160-0`) into `./data/flux/transformer`. After that, you can run the visualization. If it's trained for 160 iterations, the results are already provided in my repo.  
 3. We don't recommend using 8 H800 GPUs for the FLUX training script, because we find a global prompt batch size of 8 is not enough.
 4. More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
+5. (Thanks for a community contribution from [@Jinfa Huang](https://infaaa.github.io/), if you change the train_batch_size and train_sp_batch_size from 1 to 2, change the gradient_accumulation_steps from 4 to 12, you can train the FLUX with 8 H800 GPUs, and you can finish the FLUX training within a day.)
 
 
 ### Video Generation Rewards
