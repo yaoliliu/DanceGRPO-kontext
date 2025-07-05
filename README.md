@@ -39,6 +39,8 @@ bash scripts/finetune/finetune_sd_grpo.sh
 # for FLUX, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
 # for FLUX, training with 16 H800 GPUs for better convergence
+# (thanks for a community contribution from @Jinfa Huang, if you change the train_batch_size and train_sp_batch_size from 1 to 2, change the gradient_accumulation_steps from 4 to 12,
+# you can train the FLUX with 8 H800 GPUs, and you can finish the FLUX training within a day) 
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
