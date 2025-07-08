@@ -54,7 +54,7 @@ bash scripts/finetune/finetune_hunyuan_grpo.sh
 For the video generation open-source version, we filter the prompts from [VidProM](https://huggingface.co/datasets/WenhaoWang/VidProM) dataset for training, as shown in ```"./video_prompts.txt"```.
 
 ### Image Generation Rewards
-We give the (moving average) reward curves (also the results in `reward.txt` or `hps_reward.txt`) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within **12 hours** with 16 H800 GPUs.
+We give the (moving average) reward curves (also the results in **`reward.txt`** or **`hps_reward.txt`**) of Stable Diffusion (left or upper) and FLUX (right or lower). We can complete the FLUX training (200 iterations) within **12 hours** with 16 H800 GPUs.
 
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
@@ -66,7 +66,7 @@ We give the (moving average) reward curves (also the results in `reward.txt` or 
 
 
 ### Video Generation Rewards
-We give the (moving average) reward curves (also the results in `vq_reward.txt`) of HunyuanVideo with 16/32 H800 GPUs.
+We give the (moving average) reward curves (also the results in **`vq_reward.txt`**) of HunyuanVideo with 16/32 H800 GPUs.
 
 With 16 H800 GPUs,
 
