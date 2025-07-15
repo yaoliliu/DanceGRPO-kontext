@@ -11,6 +11,13 @@ DanceGRPO has the following features:
 - Support FLUX
 - Support HunyuanVideo
 
+## Updates
+
+- __[2025.05.12]__: 🔥 We released the paper in arXiv!
+- __[2025.05.28]__: 🔥 We released the training scripts of FLUX and Stable Diffusion!
+- __[2025.07.03]__: 🔥 We released the training scripts of HunyuanVideo!
+
+
 ## Getting Started
 ### Downloading checkpoints
 You should use ```"mkdir"``` for these folders first. 
