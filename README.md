@@ -66,7 +66,7 @@ We give the (moving average) reward curves (also the results in **`reward.txt`**
 <img src=assets/rewards/opensource_sd.png width="49%">
 <img src=assets/rewards/opensource_flux.png width="49%">
 
-1. We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. We always use larger resolutions and more sampling steps than RLHF training for visualization, because we use lower resolutions and less sampling steps for speeding up the RLHF training.
+1. We provide more visualization examples (base, 80 iters rlhf, 160 iters rlhf) in ```"./assets/flux_visualization"```. 
 2. Here is the visualization script `"./scripts/visualization/vis_flux.py"` for FLUX. First, run `rm -rf ./data/flux/transformer/*` to clear the directory, then copy the files from a trained checkpoint (e.g., `checkpoint-160-0`) into `./data/flux/transformer`. After that, you can run the visualization. If it's trained for 160 iterations, the results are already provided in my repo.  
 3. More discussion on FLUX can be found in ```"./fastvideo/README.md"```.
 4. (Thanks for a community contribution from [@Jinfa Huang](https://infaaa.github.io/), if you change the train_batch_size and train_sp_batch_size from 1 to 2, change the gradient_accumulation_steps from 4 to 12, **you can train the FLUX with 8 H800 GPUs**, and you can finish the FLUX training within a day.)
@@ -92,6 +92,8 @@ With 32 H800 GPUs,
 ### Multi-reward Training
 The Multi-reward training code and reward curves can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
 
+### Important Discussion
+Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36).
 
 ## Acknowledgement
 We learned and reused code from the following projects:
