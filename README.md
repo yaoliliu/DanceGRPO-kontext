@@ -93,7 +93,7 @@ With 32 H800 GPUs,
 ### Multi-reward Training
 The Multi-reward training code and reward curves can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
 
-### Important Discussion
+### Important Discussion and Results with More Reward Models
 Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36). We also support the pickscore for FLUX with `--use_pickscore`.
 
 ## Acknowledgement
