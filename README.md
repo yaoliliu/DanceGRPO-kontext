@@ -45,7 +45,8 @@ bash scripts/finetune/finetune_sd_grpo.sh
 ```bash
 # for FLUX, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
-# for FLUX, training with 16 H800 GPUs for better convergence 
+# for FLUX, training with 16 H800 GPUs for better convergence,
+# or you can use finetune_flux_grpo_8gpus.sh with 8 H800 GPUs for slower convergence
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
@@ -54,7 +55,7 @@ For image generation open-source version, we use the prompts in [HPD](https://hu
 ```bash
 # for HunyuanVideo, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_hunyuan_rl_embeddings.sh
-# for HunyuanVideo, training with 16/32 H800 GPUs for better convergence
+# for HunyuanVideo, using the following script for training with 16/32 H800 GPUs
 bash scripts/finetune/finetune_hunyuan_grpo.sh   
 ```
 
@@ -93,7 +94,7 @@ With 32 H800 GPUs,
 The Multi-reward training code and reward curves can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
 
 ### Important Discussion
-Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36).
+Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36). We also support the pickscore for FLUX with `--use_pickscore`.
 
 ## Acknowledgement
 We learned and reused code from the following projects:
