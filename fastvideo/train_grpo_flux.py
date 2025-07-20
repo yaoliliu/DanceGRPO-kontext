@@ -332,6 +332,39 @@ def sample_reference_model(
                     logits_per_image = image_features @ text_features.T
                     hps_score = torch.diagonal(logits_per_image)
                 all_rewards.append(hps_score)
+        
+        if args.use_pickscore:
+            def calc_probs(processor, model, prompt, images, device):
+                # preprocess
+                image_inputs = processor(
+                    images=images,
+                    padding=True,
+                    truncation=True,
+                    max_length=77,
+                    return_tensors="pt",
+                ).to(device)
+                text_inputs = processor(
+                    text=prompt,
+                    padding=True,
+                    truncation=True,
+                    max_length=77,
+                    return_tensors="pt",
+                ).to(device)
+                with torch.no_grad():
+                    # embed
+                    image_embs = model.get_image_features(**image_inputs)
+                    image_embs = image_embs / torch.norm(image_embs, dim=-1, keepdim=True)
+                
+                    text_embs = model.get_text_features(**text_inputs)
+                    text_embs = text_embs / torch.norm(text_embs, dim=-1, keepdim=True)
+                
+                    # score
+                    scores = (text_embs @ image_embs.T)[0]
+                
+                return scores
+            pil_images = [Image.open(f"./images/flux_{rank}_{index}.png")]
+            score = calc_probs(tokenizer, reward_model, caption, pil_images, device)
+            all_rewards.append(score)
 
     all_latents = torch.cat(all_latents, dim=0)
     all_log_probs = torch.cat(all_log_probs, dim=0)
@@ -426,8 +459,8 @@ def train_one_step(
     }
     gathered_reward = gather_tensor(samples["rewards"])
     if dist.get_rank()==0:
-        print("gathered_hps_reward", gathered_reward)
-        with open('./hps_reward.txt', 'a') as f: 
+        print("gathered_reward", gathered_reward)
+        with open('./reward.txt', 'a') as f: 
             f.write(f"{gathered_reward.mean().item()}\n")
 
     #计算advantage
@@ -513,7 +546,7 @@ def train_one_step(
             lr_scheduler.step()
             optimizer.zero_grad()
         if dist.get_rank()%8==0:
-            print("hps reward", sample["rewards"].item())
+            print("reward", sample["rewards"].item())
             print("ratio", ratio)
             print("advantage", sample["advantages"].item())
             print("final loss", loss.item())
@@ -544,6 +577,7 @@ def main(args):
 
     # For mixed precision training we cast all non-trainable weigths to half-precision
     # as these weights are only used for inference, keeping weights in full precision is not required
+    preprocess_val = None
     if args.use_hpsv2:
         from hpsv2.src.open_clip import create_model_and_transforms, get_tokenizer
         from typing import Union
@@ -584,6 +618,14 @@ def main(args):
         processor = get_tokenizer('ViT-H-14')
         reward_model = model.to(device)
         reward_model.eval()
+
+    if args.use_pickscore:
+        from transformers import AutoProcessor, AutoModel
+        processor_name_or_path = "laion/CLIP-ViT-H-14-laion2B-s32B-b79K"
+        model_pretrained_name_or_path = "yuvalkirstain/PickScore_v1"
+
+        processor = AutoProcessor.from_pretrained(processor_name_or_path)
+        reward_model = AutoModel.from_pretrained(model_pretrained_name_or_path).eval().to(device)
 
     main_print(f"--> loading model from {args.pretrained_model_name_or_path}")
     # keep the master weight to float32
@@ -1016,6 +1058,12 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="whether use hpsv2 as reward model",
+    )
+    parser.add_argument(
+        "--use_pickscore",
+        action="store_true",
+        default=False,
+        help="whether use pickscore as reward model",
     )
     parser.add_argument(
         "--ignore_last",
