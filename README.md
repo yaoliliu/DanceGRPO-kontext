@@ -46,7 +46,7 @@ bash scripts/finetune/finetune_sd_grpo.sh
 # for FLUX, preprocessing with 8 H800 GPUs
 bash scripts/preprocess/preprocess_flux_rl_embeddings.sh
 # for FLUX, training with 16 H800 GPUs for better convergence,
-# or you can use finetune_flux_grpo_8gpus.sh with 8 H800 GPUs for relatively slower convergence
+# or you can use finetune_flux_grpo_8gpus.sh with 8 H800 GPUs, but with relatively slower convergence
 bash scripts/finetune/finetune_flux_grpo.sh   
 ```
 
@@ -94,13 +94,15 @@ With 32 H800 GPUs,
 The Multi-reward training code and reward curves can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/19).
 
 ### Important Discussion and Results with More Reward Models
-Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36). We also support the pickscore for FLUX with `--use_pickscore`.
+Thanks for the issue from [@Yi-Xuan XU](https://github.com/xuyxu), the results of more reward models and better visualization (how to avoid grid patterns) on FLUX can be found [here](https://github.com/XueZeyue/DanceGRPO/issues/36). We also support the pickscore for FLUX with `--use_pickscore`.
 
 ## Acknowledgement
 We learned and reused code from the following projects:
 - [FastVideo](https://github.com/hao-ai-lab/FastVideo)
 - [diffusers](https://github.com/huggingface/diffusers)
 - [DDPO-Pytorch](https://github.com/kvablack/ddpo-pytorch)
+
+We thank the authors for their contributions to the community!
 
 
 ## Citation
