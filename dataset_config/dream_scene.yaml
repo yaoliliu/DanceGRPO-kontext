@@ -1,0 +1,22 @@
+type: "flux-kontext-dreamscene"
+datasets:  # flux is the type of dataset for kontext. It is a folder of images with captions.
+  # datasets are a folder of images. captions need to be txt files with the same name as the image
+  # for instance image2.jpg and image2.txt. Only jpg, jpeg, and png are supported currently
+  # images will automatically be resized and bucketed into the resolution specified
+  # on windows, escape back slashes with another backslash so
+  # "C:\\path\\to\\images\\folder"
+  - folder_path: "/home/ubuntu/lyl/DanceGRPO-kontext/data/dream_scene/supervised_data"
+    # control path is the input images for kontext for a paired dataset. These are the source images you want to change.  
+    # You can comment this out and only use normal images if you don't have a paired dataset. 
+    # Control images need to match the filenames on the folder path but in
+    # a different folder. These do not need captions.
+    control_path: "/home/ubuntu/lyl/DanceGRPO-kontext/data/dream_scene/img_input"
+    referenced_path: "/home/ubuntu/lyl/DanceGRPO-kontext/data/dream_scene/referenced_data"
+    caption_ext: "txt"
+    caption_dropout_rate: 0.05  # will drop out the caption 5% of time
+    shuffle_tokens: false  # shuffle caption order, split by commas
+    cache_latents_to_disk: true  # leave this true unless you know what you're doing
+    # Kontext runs images in at 2x the latent size. It may OOM at 1024 resolution with 24GB vram.
+    # resolution: [ 512, 768 ]  # flux enjoys multiple resolutions
+    resolution: [ 512, 768, 1024]
+      

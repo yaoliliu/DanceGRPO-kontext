@@ -17,6 +17,8 @@ from torch import Tensor
 
 from fastvideo.utils.parallel_states import nccl_info
 
+from toolkit.data_transfer_object.data_loader import DataLoaderBatchDTO
+
 
 def broadcast(input_: torch.Tensor):
     src = nccl_info.group_id * nccl_info.sp_size
@@ -307,6 +309,7 @@ def prepare_sequence_parallel_data(
     )
 
     return encoder_hidden_states, pooled_prompt_embeds, text_ids, caption
+    
 
 
 def sp_parallel_dataloader_wrapper(

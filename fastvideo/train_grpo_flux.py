@@ -9,6 +9,22 @@
 #
 # This modified file is released under the same license.
 
+import os
+import sys
+
+# 获取当前脚本的绝对路径
+current_file = os.path.abspath(__file__)
+
+# 获取当前脚本的父目录（脚本所在目录）
+script_dir = os.path.dirname(current_file)
+
+# 获取父目录的父目录（也就是脚本的“父级目录”）
+parent_dir = os.path.dirname(script_dir)
+
+# 添加到 sys.path
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
 import argparse
 import math
 import os
@@ -317,6 +333,7 @@ def sample_reference_model(
                 image = vae.decode(latents, return_dict=False)[0]
                 decoded_image = image_processor.postprocess(
                 image)
+        os.makedirs("./images", exist_ok=True)
         decoded_image[0].save(f"./images/flux_{rank}_{index}.png")
 
         if args.use_hpsv2:
@@ -557,12 +574,21 @@ def train_one_step(
 def main(args):
     torch.backends.cuda.matmul.allow_tf32 = True
 
+    debug = False
+    if debug:
+        os.environ["LOCAL_RANK"] = '0'
+        os.environ["RANK"] = '0'
+        os.environ["WORLD_SIZE"] = '1'
+        
     local_rank = int(os.environ["LOCAL_RANK"])
     rank = int(os.environ["RANK"])
     world_size = int(os.environ["WORLD_SIZE"])
-    dist.init_process_group("nccl")
+    
+    # dist.init_process_group("nccl")
+        
     torch.cuda.set_device(local_rank)
     device = torch.cuda.current_device()
+    
     initialize_sequence_parallel_state(args.sp_size)
 
     # If passed along, set the training seed now. On GPU...
@@ -630,10 +656,15 @@ def main(args):
     main_print(f"--> loading model from {args.pretrained_model_name_or_path}")
     # keep the master weight to float32
     
+    # from diffusers import  TorchAoConfig
+
+    # quantization_config = TorchAoConfig("int8wo")
+    
     transformer = FluxTransformer2DModel.from_pretrained(
             args.pretrained_model_name_or_path,
             subfolder="transformer",
-            torch_dtype = torch.float32
+            torch_dtype = torch.bfloat16,
+            # quantization_config=quantization_config,
     )
     
     fsdp_kwargs, no_split_modules = get_dit_fsdp_kwargs(
